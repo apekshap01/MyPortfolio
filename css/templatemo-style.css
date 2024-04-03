@@ -454,16 +454,16 @@ a#logo {
 05. ABOUT ME
 ================================================*/
 .about-img {
-  margin: 0 auto 40px;
+  margin: 80px auto 10px;
   position:relative;
 }
 .about-img img {
-  border-radius: 10px;
+  border-radius: 20px;
   -webkit-box-shadow: 0 0 40px rgba(0,0,0,.3);
   box-shadow: 0 0 40px rgba(0,0,0,.3);
 }
 .about-contentbox {
-  margin-top: 40px;
+  margin-top: 60px;
   text-align:left;
   line-height:1.8;
 }
