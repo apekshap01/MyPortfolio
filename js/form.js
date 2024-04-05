@@ -1,49 +1,34 @@
 $(function() {
+    // Get the form.
+    var form = $('#ajax-contact');
 
-	// Get the form.
-	var form = $('#ajax-contact');
+    // Get the messages div.
+    var formMessages = $('#form-messages');
 
-	// Get the messages div.
-	var formMessages = $('#form-messages');
+    // Set up an event listener for the contact form.
+    form.submit(function(e) {
+        // Stop the browser from submitting the form.
+        e.preventDefault();
 
-	// Set up an event listener for the contact form.
-	$(form).submit(function(e) {
-		// Stop the browser from submitting the form.
-		e.preventDefault();
+        // Get the form data.
+        var formData = new FormData(form[0]);
 
-		// Serialize the form data.
-		var formData = $(form).serialize();
+        // Simulate form submission and handle response.
+        setTimeout(function() {
+            // For demonstration purposes, assuming the message was sent successfully.
+            var successMessage = 'Your message was successfully sent!';
+            showMessage(successMessage, 'success');
+        }, 1000); // Simulate a delay for demonstration. Replace with actual AJAX call.
 
-		// Submit the form using AJAX.
-		$.ajax({
-			type: 'POST',
-			url: $(form).attr('action'),
-			data: formData
-		})
-		.done(function(response) {
-			// Make sure that the formMessages div has the 'success' class.
-			$(formMessages).removeClass('bg-danger');
-			$(formMessages).addClass('bg-success');
+        // Function to display message in the message div.
+        function showMessage(message, type) {
+            formMessages.removeClass('bg-danger bg-success').addClass('bg-' + type).text(message);
+            clearForm();
+        }
 
-			// Set the message text.
-			$(formMessages).text('Your message successfully sent');
-
-			// Clear the form.
-			$('#name, #email, #message').val('');			
-		})
-		.fail(function(data) {
-			// Make sure that the formMessages div has the 'error' class.
-			$(formMessages).removeClass('bg-success');
-			$(formMessages).addClass('bg-danger');
-
-			// Set the message text.
-			if (data.responseText !== '') {
-				$(formMessages).text(data.responseText);
-			} else {
-				$(formMessages).text('Oops! An error occured and your message could not be sent.');
-			}
-		});
-
-	});
-
+        // Function to clear the form fields.
+        function clearForm() {
+            form[0].reset();
+        }
+    });
 });
